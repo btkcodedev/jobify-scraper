@@ -1,6 +1,6 @@
 ### Jobify - A scraper for job search
 
-_Simply jobify is a python3 powered script which scrapes from career site_
+_Jobify is a python3 powered script which scrapes from career site_
 
 Currently supported sites:
 1. Spotify
