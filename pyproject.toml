@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "jobify"
+version = "0.1.0"
+description = "A job scraping tool"
+authors = ["btkcodedev <btk.codedev@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.8.1,<4.0"
+selenium = "^4.0.0"
+chromedriver-autoinstaller = "^0.2.2"
+sqlalchemy = "^1.4.0"
+firebase-admin = "^6.5.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+isort = "^5.13.2"
+flake8 = "^7.0.0"
+
+[tool.poetry.scripts]
+jobify = "jobify.main:main"
+format = "jobify.run_formatters:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 300
+target-version = ['py38']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
