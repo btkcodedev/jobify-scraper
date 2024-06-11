@@ -1,3 +1,10 @@
+### Jobify - A scraper for job search
+
+_Simply jobify is a python3 powered script which scrapes from career site_
+
+Currently supported sites:
+1. Spotify
+
 ## 1. Create virtual environment
 Move to folder `cd jobify`
 Run the command `python3 -m venv .venv`
