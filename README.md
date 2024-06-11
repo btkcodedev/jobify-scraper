@@ -10,21 +10,21 @@ Currently supported sites:
  - Run the command: `python3 -m venv .venv`
  - Activate venv: `source .venv/bin/activate`
 
-## 2.Running Your Project
+## 2. Running Your Project
 Install Poetry (if not already installed):
-`curl -sSL https://install.python-poetry.org | python3 -`
+ - `curl -sSL https://install.python-poetry.org | python3 -`
 
-## 3.Install Dependencies:
+## 3. Install Dependencies:
 Navigate to your project directory and run:
-`poetry install`
+ - `poetry install`
 
-## 4.Run Your Project:
+## 4. Run Your Project:
 Use the following command to run your job scraper:
-`poetry run job-scraper`
+ - `poetry run job-scraper`
 
-## 5.Run Tests.
+## 5. Run Tests.
 Use the following command for running test cases under `tests/` directory
-`python -m unittest jobify/tests/test_scraper.py` 
+ - `python -m unittest jobify/tests/test_scraper.py` 
 
 ## Contributions
 **Scrapers are welcomed!!** 
