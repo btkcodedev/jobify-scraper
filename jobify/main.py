@@ -1,5 +1,6 @@
 from jobify.config import COMPANIES, KEYWORDS_MAP, URLS_MAP
 from jobify.database import connect_to_database
+from jobify.firebase import write_companies
 from jobify.scraper import scrape_webpage
 from jobify.utils import setup_chromedriver
 
@@ -22,6 +23,7 @@ def main():
             print(e)
 
         finally:
+            write_companies()
             conn.close()
             print("Database connection closed")
     else:
