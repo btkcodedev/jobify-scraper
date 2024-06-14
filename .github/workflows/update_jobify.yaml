@@ -23,6 +23,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry
           poetry install
+
+      - name: Run jobify script
+        run: poetry run jobify
         env:
             FIREBASE_TYPE: service_account
             FIREBASE_PROJECT_ID: knowjobify
@@ -35,6 +38,3 @@ jobs:
             FIREBASE_AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.FIREBASE_AUTH_PROVIDER_X509_CERT_URL }}
             FIREBASE_CLIENT_X509_CERT_URL: ${{ secrets.FIREBASE_CLIENT_X509_CERT_URL }}
             FIREBASE_UNIVERSE_DOMAIN: ${{ secrets.FIREBASE_UNIVERSE_DOMAIN }}
-            
-      - name: Run jobify script
-        run: poetry run jobify
