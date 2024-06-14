@@ -27,8 +27,8 @@ jobs:
       - name: Run jobify script
         run: poetry run jobify
         env:
-            FIREBASE_TYPE: service_account
-            FIREBASE_PROJECT_ID: knowjobify
+            FIREBASE_TYPE: ${{ secrets.FIREBASE_TYPE }}
+            FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
             FIREBASE_PRIVATE_KEY_ID: ${{ secrets.FIREBASE_PRIVATE_KEY_ID }}
             FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
             FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
