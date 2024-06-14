@@ -54,8 +54,12 @@ def write_to_firebase(data, company):
 
             existing_docs = db.collection(company).where("url", "==", url).stream()
             if any(existing_docs):
-                print(f"URL {url} already exists in Firestore, skipping.")
-                continue
+                print(f"URL {url} already exists in Firestore, modifying createdAt.")
+                # Update the existing document's createdAt field to current time
+                for doc in existing_docs:
+                    db.collection(company).document(doc.id).update({
+                        "createdAt": datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+                    })
 
             # Prepare data to be written
             doc_data = {
