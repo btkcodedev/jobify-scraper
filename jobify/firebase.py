@@ -2,9 +2,9 @@ import firebase_admin
 from datetime import datetime
 from firebase_admin import credentials, firestore
 from jobify.config import COMPANIES
-from jobify.secrets.serviceAccountKey import firebase_credentials
+from jobify.secrets.serviceAccountKey import SERVICE_ACCOUNT_JSON
 
-cred = credentials.Certificate(firebase_credentials)
+cred = credentials.Certificate(SERVICE_ACCOUNT_JSON)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
