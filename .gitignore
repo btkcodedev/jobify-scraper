@@ -165,4 +165,3 @@ cython_debug/
 .vscode
 __pycache__
 __pycache__/
-secrets/

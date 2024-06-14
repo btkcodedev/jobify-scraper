@@ -2,8 +2,9 @@ import firebase_admin
 from datetime import datetime
 from firebase_admin import credentials, firestore
 from jobify.config import COMPANIES
+from jobify.secrets.serviceAccountKey import firebase_credentials
 
-cred = credentials.Certificate("jobify/secrets/serviceAccountKey.json")
+cred = credentials.Certificate(firebase_credentials)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
@@ -25,6 +26,11 @@ def write_to_firebase(data, company):
         entry = (role, category, url)
         if entry not in unique_entries:
             unique_entries.add(entry)
+
+            existing_docs = db.collection(company).where(filter=("url", "==", url)).stream()
+            if any(existing_docs):
+                print(f"URL {url} already exists in Firestore, skipping.")
+                continue
 
             # Prepare data to be written
             doc_data = {
