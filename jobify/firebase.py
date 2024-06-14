@@ -9,10 +9,35 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 def write_companies():
-    print("Starting to write companies to firebase")
-    doc = {str(i + 1): company for i, company in enumerate(COMPANIES)}
-    db.collection("companies").add(doc)
-    print("Data written to Firebase successfully.")
+    print("Starting to write companies to Firebase")
+    
+    existing_companies = set() 
+    
+    # Fetch existing companies from Firestore
+    existing_docs = db.collection("companies").get()
+    for doc in existing_docs:
+        existing_companies.add(doc.id) 
+    
+    companies_to_write = []
+    
+    for i, company in enumerate(COMPANIES, start=1):
+        if company not in existing_companies:
+            companies_to_write.append((str(i), company))
+        else:
+            print(f"Company '{company}' already exists in Firestore, skipping.")
+    
+    # Write new companies to Firestore
+    if companies_to_write:
+        batch = db.batch()
+        for idx, data in companies_to_write:
+            new_doc_ref = db.collection("companies").document(idx)
+            batch.set(new_doc_ref, {"name": data}) 
+        
+        batch.commit()
+        print(f"{len(companies_to_write)} companies successfully written to Firestore.")
+    else:
+        print("All companies were already present in Firestore, nothing new to write.")
+
 
 def write_to_firebase(data, company):
     # Schema - Role, Category, URL
@@ -27,7 +52,7 @@ def write_to_firebase(data, company):
         if entry not in unique_entries:
             unique_entries.add(entry)
 
-            existing_docs = db.collection(company).where(filter=("url", "==", url)).stream()
+            existing_docs = db.collection(company).where("url", "==", url).stream()
             if any(existing_docs):
                 print(f"URL {url} already exists in Firestore, skipping.")
                 continue
